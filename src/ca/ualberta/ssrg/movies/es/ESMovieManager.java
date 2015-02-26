@@ -14,7 +14,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.util.Log;
-import ca.ualberta.ssrg.movies.es.data.Hits;
 import ca.ualberta.ssrg.movies.es.data.SearchHit;
 import ca.ualberta.ssrg.movies.es.data.SearchResponse;
 import ca.ualberta.ssrg.movies.es.data.SimpleSearchCommand;
@@ -45,6 +44,7 @@ public class ESMovieManager {
 	public Movie getMovie(int id) {
 		SearchHit<Movie> sr = null;
 		HttpClient httpClient = new DefaultHttpClient();
+		
 		HttpGet httpGet = new HttpGet(movies.getResourceUrl() + id);
 
 		HttpResponse response = null;

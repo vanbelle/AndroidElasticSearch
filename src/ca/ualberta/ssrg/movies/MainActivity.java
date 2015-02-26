@@ -74,9 +74,21 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
-		
 
+		ESMovieManager manager = new ESMovieManager(null);
+		movies = manager.getMovies();
+		manager.getMovies().addObserver(new Observer() {
+
+			@Override
+			public void notifyUpdated(Observable o)
+			{
+				ESMovieManager manager = new ESMovieManager(null);
+				movies.clear();
+				movies = manager.getMovies();
+				moviesViewAdapter.notifyDataSetChanged();
+			}
+		});
+		
 		// Refresh the list when visible
 		// TODO: Search all
 		
@@ -102,7 +114,7 @@ public class MainActivity extends Activity {
 	 */
 	public void search(View view) {
 		movies.clear();
-
+		
 		// TODO: Extract search query from text view
 		
 		// TODO: Run the search thread
@@ -133,6 +145,10 @@ public class MainActivity extends Activity {
 	class SearchThread extends Thread {
 		// TODO: Implement search thread
 		
+		@Override
+		public void run() {
+			
+		}
 	}
 
 	
